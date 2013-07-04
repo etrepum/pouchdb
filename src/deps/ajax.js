@@ -48,6 +48,11 @@ var ajax = function ajax(options, callback) {
     var timer,timedout  = false;
     var xhr = new XMLHttpRequest();
     xhr.open(options.method, options.url);
+    if (options.xhrFields) {
+      for (var i in options.xhrFields) {
+        xhr[i] = options.xhrFields[i];
+      }
+    }
     if (options.json) {
       options.headers.Accept = 'application/json';
       options.headers['Content-Type'] = options.headers['Content-Type'] || 'application/json';

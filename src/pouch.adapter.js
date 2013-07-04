@@ -380,7 +380,9 @@ var PouchAdapter = function(opts, callback) {
         }
         Object.keys(attachments).forEach(function(key) {
           customApi._getAttachment(attachments[key], {encode: true, ctx: ctx}, function(err, data) {
-            doc._attachments[key].data = data;
+            var attachment = doc._attachments[key];
+            attachment.data = data;
+            delete attachment.stub;
             if (!--count){
               call(callback, null, doc);
             }
